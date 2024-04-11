@@ -1,0 +1,5 @@
+class Entrevistado:
+    # IMPLEMENTAR CLASSE ENTREVISTADO
+    
+    def __repr__(self):
+        # IMPLEMENTAR UM MÉTODO QUE RETORNE OS ATRIBUTOS DA CLASSE INSTANCIADA

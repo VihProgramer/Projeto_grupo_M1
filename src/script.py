@@ -1,0 +1,9 @@
+
+def inputDeDados():
+    # IMPLEMENTAR FUNÇÃO PARA RECEBER O INPUT DO USUÁRIO
+
+def escreverCSV():
+    # IMPLEMENTAR FUNÇÃO PARA REALIZAR O OUTPUT DO CSV
+
+def pesquisaDigital():
+    # IMPLEMENTAR FUNÇÃO DE ACORDO COM AS REGRAS DE NEGÓCIO
