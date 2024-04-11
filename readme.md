@@ -1,14 +1,21 @@
 TO-DOs:
 1 - # IMPLEMENTAR A CLASSE ENTREVISTADO
+
 2 - # IMPLEMENTAR UM MÉTODO QUE RETORNE OS ATRIBUTOS DA CLASSE INSTANCIADA
+
 3 - # IMPLEMENTAR AS FUNÇÕES DE SCRIPT PARA ADEQUAR-SE AS REGRAS DE NEGÓCIO
+
 4 - # IMPLEMENTAR AS CHAMADAS DO PROJETO NO MAIN.PY
 
 REGRAS:
 1 - CSV DEVE CONTER: idade, gênero, resposta_1, resposta_2, resposta_3, resposta_4, data e hora da resposta.
+
 2 - Desenvolver com POO e Programação funcional.
+
 3 - Variável idade = 00 deve finalizar/fechar o projeto.
+
 4 - As perguntas desenvolvidas só podem ser respondidas com: Sim (1), Não (2), Não sei responder (3).
+
 
 
 
