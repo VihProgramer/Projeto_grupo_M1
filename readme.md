@@ -1,4 +1,5 @@
 TO-DOs:
+
 1 - # IMPLEMENTAR A CLASSE ENTREVISTADO
 
 2 - # IMPLEMENTAR UM MÉTODO QUE RETORNE OS ATRIBUTOS DA CLASSE INSTANCIADA
@@ -8,6 +9,7 @@ TO-DOs:
 4 - # IMPLEMENTAR AS CHAMADAS DO PROJETO NO MAIN.PY
 
 REGRAS:
+
 1 - CSV DEVE CONTER: idade, gênero, resposta_1, resposta_2, resposta_3, resposta_4, data e hora da resposta.
 
 2 - Desenvolver com POO e Programação funcional.
