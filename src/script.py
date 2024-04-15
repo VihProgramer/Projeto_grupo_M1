@@ -1,9 +1,9 @@
 
-def inputDeDados():
-    # IMPLEMENTAR FUNÇÃO PARA RECEBER O INPUT DO USUÁRIO
+def input_de_dados():
+    print('estou no input_de_dados')
 
-def escreverCSV():
-    # IMPLEMENTAR FUNÇÃO PARA REALIZAR O OUTPUT DO CSV
+def escrever_csv():
+    print('estou no escrever_csv')
 
-def pesquisaDigital():
-    # IMPLEMENTAR FUNÇÃO DE ACORDO COM AS REGRAS DE NEGÓCIO
+def pesquisa_digital():
+    print('estou no pesquisa_digital')
