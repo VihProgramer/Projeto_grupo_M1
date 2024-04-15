@@ -33,6 +33,7 @@ def main(page: ft.Page):
 
     falha = ft.Text("FALHA AO GERAR O ARQUIVO!", style=ft.TextThemeStyle.HEADLINE_SMALL)
 
+
     check = ft.AnimatedSwitcher(
         c1,
         transition=ft.AnimatedSwitcherTransition.SCALE,
@@ -50,6 +51,12 @@ def main(page: ft.Page):
         switch_in_curve=ft.AnimationCurve.BOUNCE_OUT,
         switch_out_curve=ft.AnimationCurve.BOUNCE_IN,
     )
+
+    def exibir_alerta(mensagem, console):
+        alertar = ft.AlertDialog(
+            title=ft.Text(mensagem), on_dismiss=lambda e: print(console)
+        )
+        return alertar
 
     def close_app(e):
         page.window_close()
@@ -88,8 +95,22 @@ def main(page: ft.Page):
             page.update
 
     def salvar_respostas(e):
-        print('Respostas salvas')
-        input_de_dados()
+        if input_de_dados(nome.value, idade.value, pergunta_1.value, pergunta_2.value, pergunta_3.value, pergunta_4.value):
+            nome.value = ''
+            idade.value = ''
+            pergunta_1.value = ''
+            pergunta_2.value = ''
+            pergunta_3.value = ''
+            pergunta_4.value = ''
+            alertar = exibir_alerta("Respostas Salvas!", "Respostas Salvas!")
+            page.dialog = alertar
+            alertar.open = True
+            page.update()
+        else:
+            alertar = exibir_alerta("Preencha todos os campos", "Preencha todos os campos")
+            page.dialog = alertar
+            alertar.open = True
+            page.update()
         
         
         
@@ -97,7 +118,7 @@ def main(page: ft.Page):
     
     idade = ft.TextField(label="Qual a sua idade?", on_change=close_app_idade)
     
-    pergunta1 = ft.Dropdown(
+    pergunta_1 = ft.Dropdown(
         label="Você atualmente possui assinatura em uma plataforma de streaming de vídeo?",
         hint_text="Resposta",
         options=[
@@ -107,7 +128,7 @@ def main(page: ft.Page):
         ],   
     )
     
-    pergunta2 = ft.Dropdown(
+    pergunta_2 = ft.Dropdown(
         label="Você acha que a variedade de conteúdo oferecida por essas plataformas influenciam na sua decisão de assinar ou cancelar uma assinatura?",
         hint_text="Resposta",
         options=[
@@ -117,7 +138,7 @@ def main(page: ft.Page):
         ],   
     )
     
-    pergunta3 = ft.Dropdown(
+    pergunta_3 = ft.Dropdown(
         label="Você utiliza plataformas de streaming para assistir conteúdo educacional ou informativo?",
         hint_text="Resposta",
         options=[
@@ -127,7 +148,7 @@ def main(page: ft.Page):
         ],   
     )
     
-    pergunta4 = ft.Dropdown(
+    pergunta_4 = ft.Dropdown(
         label="Você acredita que as plataformas de streaming estão substituindo gradualmente a TV tradicional como principal fonte de entretenimento?",
         hint_text="Resposta",
         options=[
@@ -151,10 +172,10 @@ def main(page: ft.Page):
     row1 = ft.Row(controls=[
         nome,
         idade,
-        pergunta1,
-        pergunta2,
-        pergunta3,
-        pergunta4,
+        pergunta_1,
+        pergunta_2,
+        pergunta_3,
+        pergunta_4,
         texto,
         row2
     ], wrap=True, width=page.window_width)
@@ -164,7 +185,6 @@ def main(page: ft.Page):
 
     page.add(container)
     
-    page.update()
     
     
 ft.app(target=main)
