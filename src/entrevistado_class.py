@@ -11,5 +11,5 @@ class Entrevistado:
         self.data_hora = datetime.now()
     
     def __repr__(self):
-        data_hora_formatada = self.data_hora.strftime("%d/%m/%Y, %H:%M:%S")
-        return f"{self.idade},{self.genero},{self.resposta_1},{self.resposta_2},{self.resposta_3},{self.resposta_4},{data_hora_formatada}"
+        
+        return f"{self.idade},{self.genero},{self.resposta_1},{self.resposta_2},{self.resposta_3},{self.resposta_4},{self.data_hora}"
