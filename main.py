@@ -52,21 +52,44 @@ def main(page: ft.Page):
         switch_out_curve=ft.AnimationCurve.BOUNCE_IN,
     )
 
-    def exibir_alerta(mensagem, console):
+    def exibir_alerta(titulo, mensagem, console):
         alertar = ft.AlertDialog(
-            title=ft.Text(mensagem), on_dismiss=lambda e: print(console)
+            title=ft.Text(titulo), content=ft.Text(mensagem), on_dismiss=lambda e: print(console)
         )
         return alertar
+    
+    def confirmar_encerramento(e):
+        page.dialog = dlg_modal
+        dlg_modal.open = True
+        page.update()
 
-    def close_app(e):
+
+    def fechar_app(e):
         page.window_close()
+
+    def fechar_modal(e):
+        page.dialog = dlg_modal
+        dlg_modal.open = False
+        page.update()
+    
+    dlg_modal = ft.AlertDialog(
+        modal=True,
+        title=ft.Text("Por favor confirme"),
+        content=ft.Text("Tem certeza que deseja encerrar a aplicação"),
+        actions=[
+            ft.TextButton("Sim", on_click=fechar_app),
+            ft.TextButton("Não", on_click=fechar_modal),
+        ],
+        actions_alignment=ft.MainAxisAlignment.END
+    )
+
 
     def close_app_idade(e):
         if idade.value == "00":
             page.window_close()
 
     def gerar_csv(e):
-        
+        print(data)
         pb = ft.ProgressBar( height=10, width=400)
 
         try:
@@ -102,12 +125,12 @@ def main(page: ft.Page):
             pergunta_2.value = ''
             pergunta_3.value = ''
             pergunta_4.value = ''
-            alertar = exibir_alerta("Respostas Salvas!", "Respostas Salvas!")
+            alertar = exibir_alerta("Obrigado!","Suas respostas foram salvas com sucesso!", "")
             page.dialog = alertar
             alertar.open = True
             page.update()
         else:
-            alertar = exibir_alerta("Preencha todos os campos", "Preencha todos os campos")
+            alertar = exibir_alerta("Atenção!","Preencha todos os campos corretamente!", "")
             page.dialog = alertar
             alertar.open = True
             page.update()
@@ -161,7 +184,7 @@ def main(page: ft.Page):
     texto = ft.Text()
     button_salvar_respostas = ft.ElevatedButton(text="Salvar Respostas", on_click=salvar_respostas)
     button_gerar_csv = ft.ElevatedButton(text="Gerar CSV", on_click=gerar_csv)
-    button_fechar_app = ft.ElevatedButton(text="Fechar", on_click=close_app)
+    button_fechar_app = ft.ElevatedButton(text="Fechar", on_click=confirmar_encerramento)
 
     row2 = ft.Row(controls=[
         button_salvar_respostas,
