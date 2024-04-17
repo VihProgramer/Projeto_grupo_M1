@@ -91,7 +91,6 @@ def main(page: ft.Page):
 
     def gerar_csv(e):
         global data
-        print(data)
         pb = ft.ProgressBar( height=10, width=400)
 
         try:
@@ -117,26 +116,39 @@ def main(page: ft.Page):
 
     def salvar_respostas(e):
         global data
-        entrevistado = input_de_dados(genero.value, idade.value, pergunta_1.value, pergunta_2.value, pergunta_3.value, pergunta_4.value)
+        entrevistado = input_de_dados(
+            genero.value, idade.value, pergunta_1.value, pergunta_2.value, pergunta_3.value, pergunta_4.value, pergunta_extra_1.value, pergunta_extra_2.value
+            )
         if entrevistado:
-            data.append([entrevistado.genero, entrevistado.idade, entrevistado.resposta_1, entrevistado.resposta_2, entrevistado.resposta_3, entrevistado.resposta_4, entrevistado.data_hora.strftime("%d/%m/%Y")])
-            genero.value = ''
-            idade.value = ''
-            pergunta_1.value = ''
-            pergunta_2.value = ''
-            pergunta_3.value = ''
-            pergunta_4.value = ''
-            alertar = exibir_alerta("Obrigado!","Suas respostas foram salvas com sucesso!", "")
-            page.dialog = alertar
-            alertar.open = True
-            page.update()
+            data.append(
+                [entrevistado.genero, entrevistado.idade, entrevistado.resposta_1, entrevistado.resposta_2, entrevistado.resposta_3, entrevistado.resposta_4,entrevistado.resposta_extra_1,entrevistado.resposta_extra_2, entrevistado.data_hora.strftime("%d/%m/%Y")]
+                )
+            limpaTela()
 
         else:
             alertar = exibir_alerta("Atenção!","Preencha todos os campos corretamente!", "")
             page.dialog = alertar
             alertar.open = True
             page.update()
-        
+
+    def limpaTela():
+        try:
+            genero.value = ''
+            idade.value = ''
+            pergunta_1.value = ''
+            pergunta_2.value = ''
+            pergunta_3.value = ''
+            pergunta_4.value = ''
+            pergunta_extra_1.value = ''
+            pergunta_extra_2.value = ''
+            alertar = exibir_alerta("Obrigado!","Suas respostas foram salvas com sucesso!", "")
+            page.dialog = alertar
+            alertar.open = True
+            page.update()
+
+        except Exception as e:
+            print(f"Erro: {e}")
+            return False
 
     genero = ft.TextField(label="Qual o seu gênero?")
     
@@ -182,6 +194,25 @@ def main(page: ft.Page):
         ],
     )
 
+    pergunta_extra_1 = ft.Dropdown(
+        label="Você acha que as plataformas de streaming podem substituir completamente a TV tradicional no futuro?",
+        hint_text="Resposta",
+        options=[
+            ft.dropdown.Option("SIM"),
+            ft.dropdown.Option("NÃO"),
+            ft.dropdown.Option("NÃO SEI"),
+        ],
+    )
+    pergunta_extra_2 = ft.Dropdown(
+        label="Você acredita que o crescimento das plataformas de streaming pode levar ao fim da TV por assinatura?",
+        hint_text="Resposta",
+        options=[
+            ft.dropdown.Option("SIM"),
+            ft.dropdown.Option("NÃO"),
+            ft.dropdown.Option("NÃO SEI"),
+        ],
+    )
+
     texto = ft.Text()
     button_salvar_respostas = ft.ElevatedButton(text="Salvar Respostas", on_click=salvar_respostas)
     button_gerar_csv = ft.ElevatedButton(text="Gerar CSV", on_click=gerar_csv)
@@ -200,6 +231,8 @@ def main(page: ft.Page):
         pergunta_2,
         pergunta_3,
         pergunta_4,
+        pergunta_extra_1,
+        pergunta_extra_2,
         texto,
         row2
     ], wrap=True, width=page.window_width)
