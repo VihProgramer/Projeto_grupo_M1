@@ -60,10 +60,12 @@ def main(page: ft.Page):
         page.dialog = dlg_modal
         dlg_modal.open = True
         page.update()
+        return
 
 
     def fechar_app(e):
         page.window_close()
+        return
 
     def fechar_modal(e):
         page.dialog = dlg_modal
@@ -85,6 +87,7 @@ def main(page: ft.Page):
     def close_app_idade(e):
         if idade.value == "00":
             page.window_close()
+        return
 
     def gerar_csv(e):
         global data
@@ -142,10 +145,10 @@ def main(page: ft.Page):
             page.dialog = alertar
             alertar.open = True
             page.update()
+
         except Exception as e:
             print(f"Erro: {e}")
             return False
-
 
     genero = ft.TextField(label="Qual o seu gênero?")
     
