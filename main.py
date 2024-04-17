@@ -1,10 +1,8 @@
 from time import sleep
-import sys
-sys.path.append("src")
-
 import flet as ft
-from script import *
+from src.script import input_de_dados, escrever_csv
 
+data = []
 
 def main(page: ft.Page):
     page.title = "PROJETO EM GRUPO M01 - QUERO OS DADOS NA MINHA MESA!"
@@ -62,10 +60,12 @@ def main(page: ft.Page):
         page.dialog = dlg_modal
         dlg_modal.open = True
         page.update()
+        return
 
 
     def fechar_app(e):
         page.window_close()
+        return
 
     def fechar_modal(e):
         page.dialog = dlg_modal
@@ -87,17 +87,17 @@ def main(page: ft.Page):
     def close_app_idade(e):
         if idade.value == "00":
             page.window_close()
+        return
 
     def gerar_csv(e):
+        global data
         print(data)
         pb = ft.ProgressBar( height=10, width=400)
 
         try:
-            escrever_csv()
+            escrever_csv(data)
             page.clean()
-            
             page.add(ft.Column([ft.Text("Gerando CSV..."), pb, ft.Text("Aguarde um momento...")]))
-            
             page.update()
             
             for i in range(0, 101):
@@ -106,20 +106,21 @@ def main(page: ft.Page):
                 page.update()
             
             page.clean()
-            
             page.add(check, salvo)
-            
-            page.update      
+            page.update()   
         except:
             page.clean()
             
             page.add(error, falha)
             
-            page.update
+            page.update()
 
     def salvar_respostas(e):
-        if input_de_dados(nome.value, idade.value, pergunta_1.value, pergunta_2.value, pergunta_3.value, pergunta_4.value):
-            nome.value = ''
+        global data
+        entrevistado = input_de_dados(genero.value, idade.value, pergunta_1.value, pergunta_2.value, pergunta_3.value, pergunta_4.value)
+        if entrevistado:
+            data.append([entrevistado.genero, entrevistado.idade, entrevistado.resposta_1, entrevistado.resposta_2, entrevistado.resposta_3, entrevistado.resposta_4, entrevistado.data_hora.strftime("%d/%m/%Y")])
+            genero.value = ''
             idade.value = ''
             pergunta_1.value = ''
             pergunta_2.value = ''
@@ -129,15 +130,15 @@ def main(page: ft.Page):
             page.dialog = alertar
             alertar.open = True
             page.update()
+
         else:
             alertar = exibir_alerta("Atenção!","Preencha todos os campos corretamente!", "")
             page.dialog = alertar
             alertar.open = True
             page.update()
         
-        
-        
-    nome = ft.TextField(label="Qual o seu nome?")
+
+    genero = ft.TextField(label="Qual o seu gênero?")
     
     idade = ft.TextField(label="Qual a sua idade?", on_change=close_app_idade)
     
@@ -193,7 +194,7 @@ def main(page: ft.Page):
     ], wrap=True, width=page.window_width)
 
     row1 = ft.Row(controls=[
-        nome,
+        genero,
         idade,
         pergunta_1,
         pergunta_2,
