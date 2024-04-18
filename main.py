@@ -22,7 +22,7 @@ def main(page: ft.Page):
                         size=130,
                         weight=ft.FontWeight.BOLD,
                         foreground=ft.Paint(
-                            ft.colors.RED_400,
+                            ft.colors.INVERSE_SURFACE,
                             stroke_width=6,
                             stroke_join=ft.StrokeJoin.ROUND,
                             style=ft.PaintingStyle.STROKE,
@@ -48,12 +48,14 @@ def main(page: ft.Page):
     banner = ft.Container(
         banner_title,
         image_src=f"src/view/bg_banner.jpeg",
-        image_fit=ft.ImageFit.FIT_WIDTH,
+        image_fit=ft.ImageFit.COVER,
         alignment=ft.alignment.center,
         width=max,
         height=250,
         border_radius=10,
         margin=ft.margin.only(bottom=50),
+        border=ft.border.all(1, ft.colors.INVERSE_SURFACE),
+        blur=ft.Blur(50,50,tile_mode=ft.BlurTileMode.REPEATED),
     )
 
     c1 = ft.Container(
@@ -165,11 +167,11 @@ def main(page: ft.Page):
         global data
         entrevistado = input_de_dados(
             genero.value, idade.value, pergunta_1.value, pergunta_2.value, pergunta_3.value, pergunta_4.value, pergunta_extra_1.value, pergunta_extra_2.value
-            )
+        )
         if entrevistado:
             data.append(
                 [entrevistado.genero, entrevistado.idade, entrevistado.resposta_1, entrevistado.resposta_2, entrevistado.resposta_3, entrevistado.resposta_4,entrevistado.resposta_extra_1,entrevistado.resposta_extra_2, entrevistado.data_hora.strftime("%d/%m/%Y")]
-                )
+            )
             limpaTela()
 
         else:
@@ -261,9 +263,9 @@ def main(page: ft.Page):
     )
 
     texto = ft.Text()
-    button_salvar_respostas = ft.ElevatedButton(text="Salvar Respostas", on_click=salvar_respostas)
-    button_gerar_csv = ft.ElevatedButton(text="Gerar CSV", on_click=gerar_csv)
-    button_fechar_app = ft.ElevatedButton(text="Fechar", on_click=confirmar_encerramento)
+    button_salvar_respostas = ft.ElevatedButton(text="Salvar Respostas", on_click=salvar_respostas, icon='save', color=ft.colors.ON_SURFACE)
+    button_gerar_csv = ft.ElevatedButton(text="Gerar CSV", on_click=gerar_csv, icon='sync', color=ft.colors.ON_SURFACE)
+    button_fechar_app = ft.ElevatedButton(text="Fechar", on_click=confirmar_encerramento, icon='close', color=ft.colors.ON_SURFACE)
 
     row2 = ft.Row(controls=[
         button_salvar_respostas,
