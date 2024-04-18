@@ -1,13 +1,60 @@
 from time import sleep
 import flet as ft
 from src.script import input_de_dados, escrever_csv
+from src.view import *
 
 data = []
 
 def main(page: ft.Page):
     page.title = "PROJETO EM GRUPO M01 - QUERO OS DADOS NA MINHA MESA!"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    page.window_min_height = 1280
+    page.window_height = 1280
+    page.window_min_width = 720
+    page.window_width = 720
+
+    banner_title = ft.Stack([
+        ft.Text(
+            spans=[
+                ft.TextSpan(
+                    "SQUAD 6",
+                    ft.TextStyle(
+                        size=130,
+                        weight=ft.FontWeight.BOLD,
+                        foreground=ft.Paint(
+                            ft.colors.RED_400,
+                            stroke_width=6,
+                            stroke_join=ft.StrokeJoin.ROUND,
+                            style=ft.PaintingStyle.STROKE,
+                        )
+                    )
+                )
+            ]
+        ),
+        ft.Text(
+            spans=[
+                ft.TextSpan(
+                    "SQUAD 6",
+                    ft.TextStyle(
+                        size=130,
+                        weight=ft.FontWeight.BOLD,
+                        color=ft.colors.GREY_300,
+                    ),
+                ),
+            ],
+        ),
+    ])
+
+    banner = ft.Container(
+        banner_title,
+        image_src=f"src/view/bg_banner.jpeg",
+        image_fit=ft.ImageFit.FIT_WIDTH,
+        alignment=ft.alignment.center,
+        width=max,
+        height=250,
+        border_radius=10,
+        margin=ft.margin.only(bottom=50),
+    )
 
     c1 = ft.Container(
         ft.Icon(name=ft.icons.CHECK_CIRCLE_OUTLINED, color=ft.colors.ON_INVERSE_SURFACE),
@@ -99,9 +146,9 @@ def main(page: ft.Page):
             page.add(ft.Column([ft.Text("Gerando CSV..."), pb, ft.Text("Aguarde um momento...")]))
             page.update()
             
-            for i in range(0, 101):
-                pb.value = i * 0.01
-                sleep(0.1)
+            for i in range(0, 15):
+                pb.value = i * 0.08
+                sleep(0.125)
                 page.update()
             
             page.clean()
@@ -195,7 +242,7 @@ def main(page: ft.Page):
     )
 
     pergunta_extra_1 = ft.Dropdown(
-        label="Você acha que as plataformas de streaming podem substituir completamente a TV tradicional no futuro?",
+        label="Você acompanha as novidades e lançamentos de conteúdo nas plataformas de streaming que assina?",
         hint_text="Resposta",
         options=[
             ft.dropdown.Option("SIM"),
@@ -204,7 +251,7 @@ def main(page: ft.Page):
         ],
     )
     pergunta_extra_2 = ft.Dropdown(
-        label="Você acredita que o crescimento das plataformas de streaming pode levar ao fim da TV por assinatura?",
+        label="Você costuma assistir a conteúdo em plataformas de streaming enquanto realiza outras atividades, como trabalhar ou fazer exercícios?",
         hint_text="Resposta",
         options=[
             ft.dropdown.Option("SIM"),
@@ -225,6 +272,7 @@ def main(page: ft.Page):
     ], wrap=True, width=page.window_width)
 
     row1 = ft.Row(controls=[
+        banner,
         genero,
         idade,
         pergunta_1,
@@ -235,10 +283,10 @@ def main(page: ft.Page):
         pergunta_extra_2,
         texto,
         row2
-    ], wrap=True, width=page.window_width)
+    ], wrap=True, width=max)
     
     
-    container = ft.Container(content=row1, padding=30)
+    container = ft.Container(content=row1, padding=30, width=max)
 
     page.add(container)
     

@@ -1,57 +1,37 @@
-TO-DOs:
+Descrição do Projeto
+Este projeto consiste em um sistema de entrevistas desenvolvido em Python utilizando a biblioteca Flet. O objetivo é coletar informações dos entrevistados, armazenando os dados em um arquivo CSV de acordo com as regras estabelecidas. O sistema segue um paradigma de orientação a objetos e programação funcional, garantindo uma estrutura organizada e modularizada.
 
-1 - # IMPLEMENTAR A CLASSE ENTREVISTADO
+Instalação de Dependências
+Para executar o projeto, é necessário instalar as seguintes dependências:
 
-2 - # IMPLEMENTAR UM MÉTODO QUE RETORNE OS ATRIBUTOS DA CLASSE INSTANCIADA
+Flet: Uma biblioteca Python para desenvolvimento multiplataforma simplificado. Pode ser instalada via pip:
 
-3 - # IMPLEMENTAR AS FUNÇÕES DE SCRIPT PARA ADEQUAR-SE AS REGRAS DE NEGÓCIO
+pip install flet
 
-4 - # IMPLEMENTAR AS CHAMADAS DO PROJETO NO MAIN.PY
+Como Executar o Projeto:
 
-REGRAS:
+Clone o repositório do projeto.
+Instale as dependências conforme mencionado acima.
+Execute o arquivo main.py para iniciar o servidor.
 
-1 - CSV DEVE CONTER: idade, gênero, resposta_1, resposta_2, resposta_3, resposta_4, data e hora da resposta.
+Página Inicial: Formulário de Entrevista
 
-2 - Desenvolver com POO e Programação funcional.
+Na página inicial, os entrevistados podem preencher o formulário com suas informações e respostas para as perguntas.
 
-3 - Variável idade = 00 deve finalizar/fechar o projeto.
+Este é um guia básico de instalação e execução do projeto. Para mais detalhes, consulte a documentação ou o código-fonte disponível no repositório.
 
-4 - As perguntas desenvolvidas só podem ser respondidas com: Sim (1), Não (2), Não sei responder (3).
+Contribuidores:
 
+Antonio
+Diego
+Vitória
+Ysmael
 
-
-
---------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-RUBRICAS DO PROJETO:
-1. O código foi escrito de forma clara, fácil de ler e entender - evitando usar nomes de variáveis e funções confusas e mantendo o código organizado e comentado.
-2. As funções e métodos têm um único propósito e fazem uma única coisa.
-3. O código foi escrito de maneira a permitir a leitura rápida e fácil - isso inclui o uso adequado de espaços em branco, indentação, comentários e formatação.
-4. O código foi adequadamente comentado, de modo que seja fácil entender o que cada parte do código faz.
-5. O projeto está organizado em pastas e arquivos separados para facilitar a manutenção. [Extra]
-
-6. A pesquisa contém 4 perguntas e cada pergunta apresenta as 3 opções presentes nos requisitos;
-7. As respostas são armazenadas corretamente no arquivo .csv;
-8. O arquivo .csv está correto e pode ser aberto ou importado normalmente em um programa de planilhas;
-9. É possível terminar a execução do programa informando 00 na idade;
-10. Foram criadas ao menos 2 perguntas extras, além das 4 perguntas
-obrigatórias. [Extra]
-
-11. Foram utilizados os conceitos básicos de orientação a objetos como a definição de classes, atributos e métodos.
-12. Os conceitos de orientação a objetos utilizados foram aplicados corretamente.
-13. O conceito de orientação a objetos é utilizado de acordo com as regras de negócio que foram definidas nos requisitos do projeto.
-14. O paradigma de orientação a objetos foi usado com a aplicação do conceito de encapsulamento e métodos construtores, sendo utilizados quando realmente
-deveriam ser, não apenas para cumprir os requisitos do projeto.
-15. Todas as classes criadas respeitam o Princípio de Responsabilidade Única (SRP). [Extra]
-
-16. O código é executável sem erros e é possível testar todo o projeto.
-17. Foram utilizadas funções no código para estruturar e modularizar as operações do projeto.
-18. Foram utilizadas estruturas de dados (listas, pilhas, filas ou dicionários);
-19. O código possui tratamento adequado de exceções;
-20. O projeto faz uso adequado de bibliotecas ou módulos externos disponíveis em Python. [Extra]
-
-21. Entregou o link do repositório no GitHub no prazo correto;
-22. O código está organizado, fácil de ler, completo e funcionando no GitHub;
-23. O código tem uma documentação completa e atualizada, incluindo um README com instruções de instalação e uso;
-24. O código foi enviado em commits por etapas;
-25. As descrições dos commits/PRs estão bem redigidas e apresentam bem as mudanças realizadas. [Extra]
+Como Usar:
+1. Abra o navegador e acesse o endereço onde o servidor está sendo executado.
+2. Preencha o formulário com as informações solicitadas.
+3. Selecione as respostas para as perguntas.
+4. Clique no botão "Salvar Respostas" para registrar os dados.
+5. Para gerar um arquivo CSV, clique no botão "Gerar CSV".
+6. Você pode fechar a aplicação clicando no botão "Fechar".
+7. Este é um guia básico de instalação e execução do projeto. Para mais detalhes sobre como contribuir ou personalizar o sistema, consulte a documentação ou o código-fonte disponível no repositório.
