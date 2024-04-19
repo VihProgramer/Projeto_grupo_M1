@@ -1,6 +1,6 @@
 from time import sleep
 import flet as ft
-from src.script import input_de_dados, escrever_csv
+from src.script import input_de_dados, escrever_csv, contar_respostas, respostas, total_masculino, total_feminino
 from src.view import *
 
 data = []
@@ -8,6 +8,7 @@ data = []
 def main(page: ft.Page):
     page.title = "PROJETO EM GRUPO M01 - QUERO OS DADOS NA MINHA MESA!"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.window_min_height = 1280
     page.window_height = 1280
     page.window_min_width = 720
@@ -22,7 +23,7 @@ def main(page: ft.Page):
                         size=130,
                         weight=ft.FontWeight.BOLD,
                         foreground=ft.Paint(
-                            ft.colors.RED_400,
+                            ft.colors.INVERSE_SURFACE,
                             stroke_width=6,
                             stroke_join=ft.StrokeJoin.ROUND,
                             style=ft.PaintingStyle.STROKE,
@@ -48,12 +49,14 @@ def main(page: ft.Page):
     banner = ft.Container(
         banner_title,
         image_src=f"src/view/bg_banner.jpeg",
-        image_fit=ft.ImageFit.FIT_WIDTH,
+        image_fit=ft.ImageFit.COVER,
         alignment=ft.alignment.center,
         width=max,
-        height=250,
+        height=ft.AdaptiveControl,
         border_radius=10,
         margin=ft.margin.only(bottom=50),
+        border=ft.border.all(1, ft.colors.INVERSE_SURFACE),
+        blur=ft.Blur(50,50,tile_mode=ft.BlurTileMode.REPEATED),
     )
 
     c1 = ft.Container(
@@ -73,6 +76,77 @@ def main(page: ft.Page):
         bgcolor=ft.colors.RED_500,
         border_radius=50
     )
+
+    def grafico(to_y_sim, to_y_nao, to_y_nao_sei, title):
+        return ft.BarChart(
+            bar_groups=[
+                ft.BarChartGroup(
+                    x=0,
+                    bar_rods=[
+                        ft.BarChartRod(
+                            from_y=0,
+                            to_y=to_y_sim,
+                            width=40,
+                            color=ft.colors.GREEN,
+                            tooltip="SIM",
+                            border_radius=0,
+                        ),
+                    ],
+                ),
+                ft.BarChartGroup(
+                    x=1,
+                    bar_rods=[
+                        ft.BarChartRod(
+                            from_y=0,
+                            to_y=to_y_nao,
+                            width=40,
+                            color=ft.colors.RED,
+                            tooltip="NÃO",
+                            border_radius=0,
+                        ),
+                    ],
+                ),
+                ft.BarChartGroup(
+                    x=2,
+                    bar_rods=[
+                        ft.BarChartRod(
+                            from_y=0,
+                            to_y=to_y_nao_sei,
+                            width=40,
+                            color=ft.colors.YELLOW,
+                            tooltip="NÃO SEI",
+                            tooltip_style=ft.colors.AMBER,
+                            border_radius=0,
+                        ),
+                    ],
+                ),
+            ],
+            border=ft.border.all(1, ft.colors.ON_SURFACE),
+            left_axis=ft.ChartAxis(
+                labels_size=40, title=ft.Text(title), title_size=40
+            ),
+            bottom_axis=ft.ChartAxis(
+                labels=[
+                    ft.ChartAxisLabel(
+                        value=0, label=ft.Container(ft.Text("SIM"), padding=10)
+                    ),
+                    ft.ChartAxisLabel(
+                        value=1, label=ft.Container(ft.Text("NÃO"), padding=10)
+                    ),
+                    ft.ChartAxisLabel(
+                        value=2, label=ft.Container(ft.Text("NÃO SEI"), padding=10)
+                    ),
+                ],
+                labels_size=40,
+            ),
+            horizontal_grid_lines=ft.ChartGridLines(
+                color=ft.colors.GREY_300, width=1, dash_pattern=[3, 3]
+            ),
+            tooltip_bgcolor=ft.colors.with_opacity(0.5, ft.colors.GREY_300),
+            max_y=110,
+            interactive=True,
+            # expand=True,
+        )
     
     salvo = ft.Text("ARQUIVO GERADO COM SUCESSO!", style=ft.TextThemeStyle.HEADLINE_SMALL)
 
@@ -152,12 +226,12 @@ def main(page: ft.Page):
                 page.update()
             
             page.clean()
-            page.add(check, salvo)
+            page.add(check, salvo, button_inicio)
             page.update()   
         except:
             page.clean()
             
-            page.add(error, falha)
+            page.add(error, falha, button_inicio)
             
             page.update()
 
@@ -165,11 +239,11 @@ def main(page: ft.Page):
         global data
         entrevistado = input_de_dados(
             genero.value, idade.value, pergunta_1.value, pergunta_2.value, pergunta_3.value, pergunta_4.value, pergunta_extra_1.value, pergunta_extra_2.value
-            )
+        )
         if entrevistado:
             data.append(
                 [entrevistado.genero, entrevistado.idade, entrevistado.resposta_1, entrevistado.resposta_2, entrevistado.resposta_3, entrevistado.resposta_4,entrevistado.resposta_extra_1,entrevistado.resposta_extra_2, entrevistado.data_hora.strftime("%d/%m/%Y")]
-                )
+            )
             limpaTela()
 
         else:
@@ -196,6 +270,63 @@ def main(page: ft.Page):
         except Exception as e:
             print(f"Erro: {e}")
             return False
+        
+    def mostrar_grafico(e):
+        global total_masculino, total_feminino, respostas
+        print(data)
+        contar_respostas(data)
+
+
+        row_graficos = ft.Column(controls=[
+            grafico(respostas["Resposta 1"]["SIM"], respostas["Resposta 1"]["NÃO"], respostas["Resposta 1"]["NÃO SEI"], 'Pergunta 1'),
+            grafico(respostas["Resposta 2"]["SIM"], respostas["Resposta 2"]["NÃO"], respostas["Resposta 2"]["NÃO SEI"], 'Pergunta 2'),
+            grafico(respostas["Resposta 3"]["SIM"], respostas["Resposta 3"]["NÃO"], respostas["Resposta 3"]["NÃO SEI"], 'Pergunta 3'),
+            grafico(respostas["Resposta 4"]["SIM"], respostas["Resposta 4"]["NÃO"], respostas["Resposta 4"]["NÃO SEI"], 'Pergunta 4'),
+            grafico(respostas["Resposta 5"]["SIM"], respostas["Resposta 5"]["NÃO"], respostas["Resposta 5"]["NÃO SEI"], 'Pergunta 5'),
+            grafico(respostas["Resposta 6"]["SIM"], respostas["Resposta 6"]["NÃO"], respostas["Resposta 6"]["NÃO SEI"], 'Pergunta 6')
+        ], width=page.window_width)
+
+        row_graficos = ft.ResponsiveRow([
+                ft.Container(
+                    grafico(respostas["Resposta 1"]["SIM"], respostas["Resposta 1"]["NÃO"], respostas["Resposta 1"]["NÃO SEI"], 'Pergunta 1'),
+                    padding=5,
+                    col={"sm": 6, "md": 4, "xl": 6},
+                ),
+                ft.Container(
+                    grafico(respostas["Resposta 2"]["SIM"], respostas["Resposta 2"]["NÃO"], respostas["Resposta 2"]["NÃO SEI"], 'Pergunta 2'),
+                    padding=5,
+                    col={"sm": 6, "md": 4, "xl": 6},
+                ),
+                ft.Container(
+                    grafico(respostas["Resposta 3"]["SIM"], respostas["Resposta 3"]["NÃO"], respostas["Resposta 3"]["NÃO SEI"], 'Pergunta 3'),
+                    padding=5,
+                    col={"sm": 6, "md": 4, "xl": 6},
+                ),
+                ft.Container( 
+                    grafico(respostas["Resposta 4"]["SIM"], respostas["Resposta 4"]["NÃO"], respostas["Resposta 4"]["NÃO SEI"], 'Pergunta 4'),
+                    padding=5,
+                    col={"sm": 6, "md": 4, "xl": 6},
+                ),
+                ft.Container(
+                    grafico(respostas["Resposta 5"]["SIM"], respostas["Resposta 5"]["NÃO"], respostas["Resposta 5"]["NÃO SEI"], 'Pergunta 5'),
+                    padding=5,
+                    col={"sm": 6, "md": 4, "xl": 6},
+                ),
+                ft.Container( 
+                    grafico(respostas["Resposta 6"]["SIM"], respostas["Resposta 6"]["NÃO"], respostas["Resposta 6"]["NÃO SEI"], 'Pergunta 6'),
+                    padding=5,
+                    col={"sm": 6, "md": 4, "xl": 6},
+                ),
+            ]
+        )
+
+        
+        page.clean()
+        page.add(row_graficos)
+        page.add(button_inicio)
+        page.update()
+
+
 
     genero = ft.TextField(label="Qual o seu gênero?")
     
@@ -260,33 +391,76 @@ def main(page: ft.Page):
         ],
     )
 
-    texto = ft.Text()
-    button_salvar_respostas = ft.ElevatedButton(text="Salvar Respostas", on_click=salvar_respostas)
-    button_gerar_csv = ft.ElevatedButton(text="Gerar CSV", on_click=gerar_csv)
-    button_fechar_app = ft.ElevatedButton(text="Fechar", on_click=confirmar_encerramento)
+    row_perguntas = ft.ResponsiveRow([
+        ft.Container(
+            genero,
+            padding=5,
+            col={"sm": 12, "md": 4, "xl": 6},
+        ),
+        ft.Container(
+            idade,
+            padding=5,
+            col={"sm": 12, "md": 4, "xl": 6},
+        ),
+        ft.Container(
+            pergunta_1,
+            padding=5,
+            col={"sm": 12, "md": 4, "xl": 6},
+        ),
+        ft.Container(
+            pergunta_2,
+            padding=5,
+            col={"sm": 12, "md": 4, "xl": 6},
+        ),
+        ft.Container(
+            pergunta_3,
+            padding=5,
+            col={"sm": 12, "md": 4, "xl": 6},
+        ),
+        ft.Container( 
+            pergunta_4,
+            padding=5,
+            col={"sm": 12, "md": 4, "xl": 6},
+        ),
+        ft.Container(
+            pergunta_extra_1,
+            padding=5,
+            col={"sm": 12, "md": 4, "xl": 6},
+        ),
+        ft.Container( 
+            pergunta_extra_2,
+            padding=5,
+            col={"sm": 12, "md": 4, "xl": 6},
+        ),
+    ])
 
-    row2 = ft.Row(controls=[
+    def voltar_inicio(e):
+        page.clean()
+        container = ft.Container(content=row1, padding=30, width=max, height=max)
+        page.add(container)
+        page.update
+
+    button_salvar_respostas = ft.ElevatedButton(text="Salvar Respostas", on_click=salvar_respostas, icon='save', color=ft.colors.ON_SURFACE)
+    button_gerar_csv = ft.ElevatedButton(text="Gerar CSV", on_click=gerar_csv, icon='sync', color=ft.colors.ON_SURFACE)
+    button_mostrar_grafico = ft.ElevatedButton(text="Gráfico", on_click=mostrar_grafico, icon='REMOVE_RED_EYE', color=ft.colors.ON_SURFACE)
+    button_fechar_app = ft.ElevatedButton(text="Fechar", on_click=confirmar_encerramento, icon='close', color=ft.colors.ON_SURFACE)
+    button_inicio = ft.ElevatedButton(text="Início", on_click=voltar_inicio, icon='home', color=ft.colors.ON_SURFACE)
+
+    row_buttons = ft.Row(controls=[
         button_salvar_respostas,
         button_gerar_csv,
-        button_fechar_app
-    ], wrap=True, width=page.window_width)
+        button_mostrar_grafico,
+        button_fechar_app,
+    ], wrap=True, width=page.window_width, col={"sm": 12, "md": 4, "xl": 6})
 
     row1 = ft.Row(controls=[
         banner,
-        genero,
-        idade,
-        pergunta_1,
-        pergunta_2,
-        pergunta_3,
-        pergunta_4,
-        pergunta_extra_1,
-        pergunta_extra_2,
-        texto,
-        row2
+        row_perguntas,
+        row_buttons
     ], wrap=True, width=max)
     
     
-    container = ft.Container(content=row1, padding=30, width=max)
+    container = ft.Container(content=row1, padding=30, width=max, height=max)
 
     page.add(container)
     
