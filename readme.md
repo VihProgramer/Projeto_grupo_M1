@@ -21,14 +21,15 @@
 
 <p>Na página inicial, os entrevistados podem preencher o formulário com suas informações e respostas para as perguntas.</p>
 
+![file_2024-04-19_23 51 13](https://github.com/VihProgramer/Projeto_grupo_M1/assets/114250155/d7710a7c-dea6-4445-b2d5-17e0319530e0)
 
 
 <h4>👤 Contribuidores:</h4>
 
-<a href="https://github.com/Juevan">Antonio Juevan</a>
-<a href="https://github.com/1DiegoDev">Diego Carvalho</a>
-<a href="https://github.com/VihProgramer">Vitória Tavares</a>
-<a href="https://github.com/ysmaelmarks">Ysmael Marques</a>
+<li><a href="https://github.com/Juevan">Antonio Juevan</a></li>
+<li><a href="https://github.com/1DiegoDev">Diego Carvalho</a></li>
+<li><a href="https://github.com/VihProgramer">Vitória Tavares</a></li>
+<li><a href="https://github.com/ysmaelmarks">Ysmael Marques</a></li>
 
 <h4>💡 Como Usar:</h4>
 <li>Preencha o formulário com as informações solicitadas.</li>
