@@ -1,37 +1,38 @@
-Descrição do Projeto
-Este projeto consiste em um sistema de entrevistas desenvolvido em Python utilizando a biblioteca Flet. O objetivo é coletar informações dos entrevistados, armazenando os dados em um arquivo CSV de acordo com as regras estabelecidas. O sistema segue um paradigma de orientação a objetos e programação funcional, garantindo uma estrutura organizada e modularizada.
+<h1>Quero os dados na minha mesa! 🔍</h1>
+<h4>📄 Descrição do Projeto</h4>
+<p>Este projeto consiste em um sistema de entrevistas desenvolvido em Python utilizando a biblioteca Flet. O objetivo é coletar informações dos entrevistados, armazenando os dados em um arquivo CSV de acordo com as regras estabelecidas. O sistema segue um paradigma de orientação a objetos e programação funcional, garantindo uma estrutura organizada e modularizada.</p>
 
-Instalação de Dependências
-Para executar o projeto, é necessário instalar as seguintes dependências:
+<h4>📥 Instalação de Dependências</h4>
 
-Flet: Uma biblioteca Python para desenvolvimento multiplataforma simplificado. Pode ser instalada via pip:
+<p>Para executar o projeto, é necessário instalar as seguintes dependências:</p>
 
-pip install flet
+<h6>
+    <p>Flet: Uma biblioteca Python para desenvolvimento multiplataforma simplificado. Pode ser instalada via pip:</p>
+</h6>
 
-Como Executar o Projeto:
+<div style="background-color: grey; padding: 10px; border-radius: 4px; text-align: center;"><h6 style="color: #fff;">pip install flet</h6></div>
 
-Clone o repositório do projeto.
-Instale as dependências conforme mencionado acima.
-Execute o arquivo main.py para iniciar o servidor.
+<h4>🚨 Como Executar o Projeto:</h4>
+<li>Clone o repositório do projeto.</li>
+<li>Instale as dependências conforme mencionado acima.</li>
+<li>Execute o arquivo main.py para iniciar o servidor.</li>
 
-Página Inicial: Formulário de Entrevista
+<h4>🏠 Página Inicial: Formulário de Entrevista</h4>
 
-Na página inicial, os entrevistados podem preencher o formulário com suas informações e respostas para as perguntas.
+<p>Na página inicial, os entrevistados podem preencher o formulário com suas informações e respostas para as perguntas.</p>
 
-Este é um guia básico de instalação e execução do projeto. Para mais detalhes, consulte a documentação ou o código-fonte disponível no repositório.
 
-Contribuidores:
 
-Antonio
-Diego
-Vitória
-Ysmael
+<h4>👤 Contribuidores:</h4>
 
-Como Usar:
-1. Abra o navegador e acesse o endereço onde o servidor está sendo executado.
-2. Preencha o formulário com as informações solicitadas.
-3. Selecione as respostas para as perguntas.
-4. Clique no botão "Salvar Respostas" para registrar os dados.
-5. Para gerar um arquivo CSV, clique no botão "Gerar CSV".
-6. Você pode fechar a aplicação clicando no botão "Fechar".
-7. Este é um guia básico de instalação e execução do projeto. Para mais detalhes sobre como contribuir ou personalizar o sistema, consulte a documentação ou o código-fonte disponível no repositório.
+<a href="https://github.com/Juevan">Antonio Juevan</a>
+<a href="https://github.com/1DiegoDev">Diego Carvalho</a>
+<a href="https://github.com/VihProgramer">Vitória Tavares</a>
+<a href="https://github.com/ysmaelmarks">Ysmael Marques</a>
+
+<h4>💡 Como Usar:</h4>
+<li>Preencha o formulário com as informações solicitadas.</li>
+<li>Selecione as respostas para as perguntas.</li>
+<li>Clique no botão "Salvar Respostas" para registrar os dados.</li>
+<li>Para gerar um arquivo CSV, clique no botão "Gerar CSV".</li>
+<li>Você pode fechar a aplicação clicando no botão "Fechar".</li>

@@ -9,8 +9,8 @@ def main(page: ft.Page):
     page.title = "PROJETO EM GRUPO M01 - QUERO OS DADOS NA MINHA MESA!"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.window_min_height = 1280
-    page.window_height = 1280
+    page.window_min_height = 980
+    page.window_height = 980
     page.window_min_width = 720
     page.window_width = 720
 
@@ -326,11 +326,17 @@ def main(page: ft.Page):
         page.add(button_inicio)
         page.update()
 
-
-
-    genero = ft.TextField(label="Qual o seu gênero?")
+    genero = ft.Dropdown(
+        label="Qual o seu gênero?",
+        hint_text="Resposta",
+        options=[
+            ft.dropdown.Option("FEMININO"),
+            ft.dropdown.Option("MASCULINO"),
+            ft.dropdown.Option("OUTROS"),
+        ],   
+    )
     
-    idade = ft.TextField(label="Qual a sua idade?", on_change=close_app_idade)
+    idade = ft.TextField(label="Qual a sua idade? (Ao digitar 00 o programa será encerrado)", input_filter=ft.NumbersOnlyInputFilter(), on_change=close_app_idade)
     
     pergunta_1 = ft.Dropdown(
         label="Você atualmente possui assinatura em uma plataforma de streaming de vídeo?",
