@@ -1,4 +1,4 @@
-<h1>Quero os dados na minha mesa! 🔍</h1>
+<h1>Quero os Dados na Minha Mesa! 🔍</h1>
 <h4>📄 Descrição do Projeto</h4>
 <p>Este projeto consiste em um sistema de entrevistas desenvolvido em Python utilizando a biblioteca Flet. O objetivo é coletar informações dos entrevistados, armazenando os dados em um arquivo CSV de acordo com as regras estabelecidas. O sistema segue um paradigma de orientação a objetos e programação funcional, garantindo uma estrutura organizada e modularizada.</p>
 
